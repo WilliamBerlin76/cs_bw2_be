@@ -2,24 +2,26 @@ const router = require('express').Router()
 
 const WorldInfo = require('../models/world-model');
 
-router.post('/rooms', async (req, res) => {
+router.post('/rooms', (req, res) => {
     const roomInfo = req.body;
 
     if(!roomInfo.room_id){
         res.status(400).json({ message: 'must include room id'})
     }
 
-    if(roomInfo.shop === 1){
-        await WorldInfo.addShop({room_id: roomInfo.room_id})
-    }
-    if(roomInfo.shrine === 1){
-        await WorldInfo.addShrine({room_id: roomInfo.room_id})
-    }
-    if(roomInfo.name_changer === 1){
-        await WorldInfo.addNameChanger({room_id: roomInfo.room_id})
-    }
     WorldInfo.addRoom(roomInfo)
-        .then(room => res.status(201).json(room))
+        .then(async room => {
+            if(roomInfo.shop === 1){
+                await WorldInfo.addShop({room_id: roomInfo.room_id})
+            }
+            if(roomInfo.shrine === 1){
+                await WorldInfo.addShrine({room_id: roomInfo.room_id})
+            }
+            if(roomInfo.name_changer === 1){
+                await WorldInfo.addNameChanger({room_id: roomInfo.room_id})
+            }
+            res.status(201).json(room)
+        })
         .catch(err => {
             console.log(err)
             res.status(500).json({error: 'the server failed to add the room'})
