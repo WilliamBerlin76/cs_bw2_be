@@ -1,7 +1,9 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('rooms', tbl => {
-        tbl.integer('room_id').notNullable(); // will act as room num and primary key
+        tbl.integer('room_id')
+            .unique()
+            .notNullable(); // will act as room num and primary key
 
         tbl.string('name', 128);
         /////// exits ////////

@@ -7,5 +7,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists('rooms');
+    return knex.schema.dropTableIfExists('items');
 };
