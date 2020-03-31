@@ -2,7 +2,9 @@ const db = require('../config/db-config');
 
 module.exports = {
     addRoom,
+    updateRoom,
     getRooms,
+    getRoomById,
     addShop,
     addShrine,
     addNameChanger,
@@ -16,10 +18,21 @@ function addRoom(info){
             .insert(info)
 }
 
+function updateRoom(changes, id){
+    return db('rooms')
+            .where('room_id', '=', id)
+            .update(changes)
+}
+
 function getRooms(){
     return db('rooms')
 }
 
+function getRoomById(id){
+    return db('rooms')
+            .where('room_id', '=', id)
+            .first()
+}
 function addShop(info){
     return db('shops').insert(info)
 }

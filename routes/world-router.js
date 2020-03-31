@@ -39,6 +39,33 @@ router.get('/rooms', (req, res) => {
         })
 })
 
+router.put('/rooms/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    
+    WorldInfo.updateRoom(changes, id)
+        .then(room => {
+            res.status(200).json(room)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({message: 'could not update the room info'})
+        })
+});
+
+router.get('/rooms/:id', (req, res) => {
+    const { id } = req.params;
+   
+    WorldInfo.getRoomById(id)
+        .then(room => {
+            res.status(200).json(room)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({message: 'the server could not retrieve the room'})
+        })
+})
+
 router.get('/shops', (req, res) => {
     WorldInfo.getShops()
         .then(shops => {
