@@ -55,9 +55,13 @@ router.put('/rooms/:id', (req, res) => {
 
 router.get('/rooms/:id', (req, res) => {
     const { id } = req.params;
+    
    
     WorldInfo.getRoomById(id)
         .then(room => {
+            if(!room){
+                res.status(404).json({ message: "that room is not yet in the db" })
+            } 
             res.status(200).json(room)
         })
         .catch(err => {
