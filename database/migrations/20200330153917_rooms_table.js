@@ -13,7 +13,7 @@ exports.up = function(knex) {
         tbl.integer('w');
 
         tbl.integer('x_coord');
-        tbl.string('y_coord');
+        tbl.integer('y_coord');
 
         /////// special room details ////////
         tbl.integer('name_changer');
