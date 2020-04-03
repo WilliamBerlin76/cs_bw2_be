@@ -6,6 +6,9 @@ exports.up = function(knex) {
             .notNullable(); // will act as room num and primary key
 
         tbl.string('name', 128);
+        tbl.string('description');
+        tbl.integer('elevation')
+        tbl.string('terrain');
         /////// exits ////////
         tbl.integer('n');
         tbl.integer('s');

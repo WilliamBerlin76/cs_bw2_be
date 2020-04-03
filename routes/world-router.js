@@ -4,7 +4,7 @@ const WorldInfo = require('../models/world-model');
 
 router.post('/rooms', (req, res) => {
     const roomInfo = req.body;
-
+    console.log(roomInfo)
     if(!roomInfo.room_id){
         res.status(400).json({ message: 'must include room id'})
     }
