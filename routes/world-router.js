@@ -45,6 +45,15 @@ router.put('/rooms/:id', (req, res) => {
     
     WorldInfo.updateRoom(changes, id)
         .then(room => {
+            if(changes.shrine === 1){
+                await WorldInfo.addShrine({room_id: id})
+            }
+            if(changes.shop === 1){
+                await WorldInfo.addShop({room_id: id})
+            }
+            if (changes.name_changer === 1){
+                await WorldInfo.addNameChanger({room_id: id})
+            }
             res.status(200).json(room)
         })
         .catch(err => {
