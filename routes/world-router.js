@@ -39,12 +39,12 @@ router.get('/rooms', (req, res) => {
         })
 })
 
-router.put('/rooms/:id', (req, res) => {
+router.put('/rooms/:id',(req, res) => {
     const { id } = req.params;
     const changes = req.body;
     
     WorldInfo.updateRoom(changes, id)
-        .then(room => {
+        .then(async room => {
             if(changes.shrine === 1){
                 await WorldInfo.addShrine({room_id: id})
             }
